@@ -1,7 +1,7 @@
-import {Entity, model, property} from '@loopback/repository';
+import { Entity, model, property } from '@loopback/repository';
 
-@model({settings: {}, name: 'device_ack'})
-export class DeviceAck extends Entity {
+@model({ settings: {}, name: 'device_error'})
+export class DeviceError extends Entity {
   @property({
     type: 'string',
     id: true,
@@ -42,10 +42,16 @@ export class DeviceAck extends Entity {
   applicationName?: string;
 
   @property({
-    type: 'boolean',
-    name: 'acknowledged',
+    type: 'string',
+    name: 'type',
   })
-  acknowledged?: boolean;
+  type?: string;
+
+  @property({
+    type: 'string',
+    name: 'error',
+  })
+  error?: string;
 
   @property({
     type: 'number',
@@ -60,13 +66,13 @@ export class DeviceAck extends Entity {
   tags?: string;
 
 
-  constructor(data?: Partial<DeviceAck>) {
+  constructor(data?: Partial<DeviceError>) {
     super(data);
   }
 }
 
-export interface DeviceAckRelations {
+export interface DeviceErrorRelations {
   // describe navigational properties here
 }
 
-export type DeviceAckWithRelations = DeviceAck & DeviceAckRelations;
+export type DeviceErrorWithRelations = DeviceError & DeviceErrorRelations;

@@ -1,7 +1,7 @@
-import {Entity, model, property} from '@loopback/repository';
+import { Entity, model, property } from '@loopback/repository';
 
-@model({settings: {}, name: 'device_ack'})
-export class DeviceAck extends Entity {
+@model({ settings: {}, name: 'device_location' })
+export class DeviceStatus extends Entity {
   @property({
     type: 'string',
     id: true,
@@ -42,16 +42,28 @@ export class DeviceAck extends Entity {
   applicationName?: string;
 
   @property({
-    type: 'boolean',
-    name: 'acknowledged',
+    type: 'number',
+    name: 'margin',
   })
-  acknowledged?: boolean;
+  margin?: number;
+
+  @property({
+    type: 'boolean',
+    name: 'external_power_source',
+  })
+  externalPowerSource?: boolean;
+
+  @property({
+    type: 'boolean',
+    name: 'battery_level_unavailable',
+  })
+  batteryLevelUnavailable?: boolean;
 
   @property({
     type: 'number',
-    name: 'f_cnt',
+    name: 'battery_level',
   })
-  fCnt?: number;
+  batteryLevel?: number;
 
   @property({
     type: 'string',
@@ -59,14 +71,13 @@ export class DeviceAck extends Entity {
   })
   tags?: string;
 
-
-  constructor(data?: Partial<DeviceAck>) {
+  constructor(data?: Partial<DeviceStatus>) {
     super(data);
   }
 }
 
-export interface DeviceAckRelations {
+export interface DeviceStatusRelations {
   // describe navigational properties here
 }
 
-export type DeviceAckWithRelations = DeviceAck & DeviceAckRelations;
+export type DeviceStatusWithRelations = DeviceStatus & DeviceStatusRelations;

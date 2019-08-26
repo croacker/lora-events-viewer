@@ -1,7 +1,7 @@
-import {Entity, model, property} from '@loopback/repository';
+import { Entity, model, property } from '@loopback/repository';
 
-@model({settings: {}, name: 'device_ack'})
-export class DeviceAck extends Entity {
+@model({ settings: {}, name: 'device_location' })
+export class DeviceLocation extends Entity {
   @property({
     type: 'string',
     id: true,
@@ -42,16 +42,28 @@ export class DeviceAck extends Entity {
   applicationName?: string;
 
   @property({
-    type: 'boolean',
-    name: 'acknowledged',
+    type: 'number',
+    name: 'altitude',
   })
-  acknowledged?: boolean;
+  altitude?: number;
 
   @property({
     type: 'number',
-    name: 'f_cnt',
+    name: 'latitude',
   })
-  fCnt?: number;
+  latitude?: number;
+
+  @property({
+    type: 'number',
+    name: 'longitude',
+  })
+  longitude?: number;
+
+  @property({
+    type: 'string',
+    name: 'geohash',
+  })
+  geohash?: string;
 
   @property({
     type: 'string',
@@ -59,14 +71,20 @@ export class DeviceAck extends Entity {
   })
   tags?: string;
 
+  @property({
+    type: 'number',
+    name: 'accuracy',
+  })
+  accuracy?: number;
 
-  constructor(data?: Partial<DeviceAck>) {
+
+  constructor(data?: Partial<DeviceLocation>) {
     super(data);
   }
 }
 
-export interface DeviceAckRelations {
+export interface DeviceLocationRelations {
   // describe navigational properties here
 }
 
-export type DeviceAckWithRelations = DeviceAck & DeviceAckRelations;
+export type DeviceLocationWithRelations = DeviceLocation & DeviceLocationRelations;

@@ -39,7 +39,6 @@ export class DeviceUpPayloadController {
   async fromHex(
     @param.path.string('hexStr') hexStr: string
   ): Promise<object> {
-    hexStr = hexStr || "0c27021e1a57025bb613034226690364a1ef635df7826da64fa24e988024bc5b71e0893e97fcd60c20bbb300900b00000000";
     const buf = Buffer.from(hexStr, "hex");
     return this.bufferToModel(buf);
   }
@@ -52,7 +51,6 @@ export class DeviceUpPayloadController {
   async fromBase64(
     @param.path.string('base64Str') base64Str: string
   ): Promise<object> {
-
     const buf = Buffer.from(base64Str, "base64");
     return this.bufferToModel(buf);
   }

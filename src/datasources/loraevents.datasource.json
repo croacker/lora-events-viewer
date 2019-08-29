@@ -1,8 +1,8 @@
 {
   "name": "loraevents",
   "connector": "postgresql",
-  "url": "postgres://postgres:123@172.27.12.7:5432/lora-event",
-  "host": "172.27.12.7",
+  "url": "postgres://postgres:123@172.27.12.4:5432/lora-event",
+  "host": "172.27.12.4",
   "port": 5432,
   "user": "postgres",
   "password": "123",

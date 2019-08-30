@@ -6,15 +6,15 @@ import {
   Where,
 } from '@loopback/repository';
 import {
-  post,
+  // post,
   param,
   get,
   getFilterSchemaFor,
   getModelSchemaRef,
   getWhereSchemaFor,
-  patch,
-  put,
-  del,
+  // patch,
+  // put,
+  // del,
   requestBody,
 } from '@loopback/rest';
 import {DeviceAck} from '../models';
@@ -26,14 +26,14 @@ export class DeviceAckController {
     public deviceAckRepository : DeviceAckRepository,
   ) {}
 
-  @post('/device-acks', {
-    responses: {
-      '200': {
-        description: 'DeviceAck model instance',
-        content: {'application/json': {schema: getModelSchemaRef(DeviceAck)}},
-      },
-    },
-  })
+  // @post('/device-acks', {
+  //   responses: {
+  //     '200': {
+  //       description: 'DeviceAck model instance',
+  //       content: {'application/json': {schema: getModelSchemaRef(DeviceAck)}},
+  //     },
+  //   },
+  // })
   async create(
     @requestBody({
       content: {
@@ -79,14 +79,14 @@ export class DeviceAckController {
     return this.deviceAckRepository.find(filter);
   }
 
-  @patch('/device-acks', {
-    responses: {
-      '200': {
-        description: 'DeviceAck PATCH success count',
-        content: {'application/json': {schema: CountSchema}},
-      },
-    },
-  })
+  // @patch('/device-acks', {
+  //   responses: {
+  //     '200': {
+  //       description: 'DeviceAck PATCH success count',
+  //       content: {'application/json': {schema: CountSchema}},
+  //     },
+  //   },
+  // })
   async updateAll(
     @requestBody({
       content: {
@@ -113,13 +113,13 @@ export class DeviceAckController {
     return this.deviceAckRepository.findById(id);
   }
 
-  @patch('/device-acks/{id}', {
-    responses: {
-      '204': {
-        description: 'DeviceAck PATCH success',
-      },
-    },
-  })
+  // @patch('/device-acks/{id}', {
+  //   responses: {
+  //     '204': {
+  //       description: 'DeviceAck PATCH success',
+  //     },
+  //   },
+  // })
   async updateById(
     @param.path.string('id') id: string,
     @requestBody({
@@ -134,13 +134,13 @@ export class DeviceAckController {
     await this.deviceAckRepository.updateById(id, deviceAck);
   }
 
-  @put('/device-acks/{id}', {
-    responses: {
-      '204': {
-        description: 'DeviceAck PUT success',
-      },
-    },
-  })
+  // @put('/device-acks/{id}', {
+  //   responses: {
+  //     '204': {
+  //       description: 'DeviceAck PUT success',
+  //     },
+  //   },
+  // })
   async replaceById(
     @param.path.string('id') id: string,
     @requestBody() deviceAck: DeviceAck,
@@ -148,13 +148,13 @@ export class DeviceAckController {
     await this.deviceAckRepository.replaceById(id, deviceAck);
   }
 
-  @del('/device-acks/{id}', {
-    responses: {
-      '204': {
-        description: 'DeviceAck DELETE success',
-      },
-    },
-  })
+  // @del('/device-acks/{id}', {
+  //   responses: {
+  //     '204': {
+  //       description: 'DeviceAck DELETE success',
+  //     },
+  //   },
+  // })
   async deleteById(@param.path.string('id') id: string): Promise<void> {
     await this.deviceAckRepository.deleteById(id);
   }

@@ -6,15 +6,15 @@ import {
   Where,
 } from '@loopback/repository';
 import {
-  post,
+  // post,
   param,
   get,
   getFilterSchemaFor,
   getModelSchemaRef,
   getWhereSchemaFor,
-  patch,
-  put,
-  del,
+  // patch,
+  // put,
+  // del,
   requestBody,
 } from '@loopback/rest';
 import {DeviceError} from '../models';
@@ -26,14 +26,14 @@ export class DeviceErrorController {
     public deviceErrorRepository : DeviceErrorRepository,
   ) {}
 
-  @post('/device-errors', {
-    responses: {
-      '200': {
-        description: 'DeviceError model instance',
-        content: {'application/json': {schema: getModelSchemaRef(DeviceError)}},
-      },
-    },
-  })
+  // @post('/device-errors', {
+  //   responses: {
+  //     '200': {
+  //       description: 'DeviceError model instance',
+  //       content: {'application/json': {schema: getModelSchemaRef(DeviceError)}},
+  //     },
+  //   },
+  // })
   async create(
     @requestBody({
       content: {
@@ -79,14 +79,14 @@ export class DeviceErrorController {
     return this.deviceErrorRepository.find(filter);
   }
 
-  @patch('/device-errors', {
-    responses: {
-      '200': {
-        description: 'DeviceError PATCH success count',
-        content: {'application/json': {schema: CountSchema}},
-      },
-    },
-  })
+  // @patch('/device-errors', {
+  //   responses: {
+  //     '200': {
+  //       description: 'DeviceError PATCH success count',
+  //       content: {'application/json': {schema: CountSchema}},
+  //     },
+  //   },
+  // })
   async updateAll(
     @requestBody({
       content: {
@@ -113,13 +113,13 @@ export class DeviceErrorController {
     return this.deviceErrorRepository.findById(id);
   }
 
-  @patch('/device-errors/{id}', {
-    responses: {
-      '204': {
-        description: 'DeviceError PATCH success',
-      },
-    },
-  })
+  // @patch('/device-errors/{id}', {
+  //   responses: {
+  //     '204': {
+  //       description: 'DeviceError PATCH success',
+  //     },
+  //   },
+  // })
   async updateById(
     @param.path.string('id') id: string,
     @requestBody({
@@ -134,13 +134,13 @@ export class DeviceErrorController {
     await this.deviceErrorRepository.updateById(id, deviceError);
   }
 
-  @put('/device-errors/{id}', {
-    responses: {
-      '204': {
-        description: 'DeviceError PUT success',
-      },
-    },
-  })
+  // @put('/device-errors/{id}', {
+  //   responses: {
+  //     '204': {
+  //       description: 'DeviceError PUT success',
+  //     },
+  //   },
+  // })
   async replaceById(
     @param.path.string('id') id: string,
     @requestBody() deviceError: DeviceError,
@@ -148,13 +148,13 @@ export class DeviceErrorController {
     await this.deviceErrorRepository.replaceById(id, deviceError);
   }
 
-  @del('/device-errors/{id}', {
-    responses: {
-      '204': {
-        description: 'DeviceError DELETE success',
-      },
-    },
-  })
+  // @del('/device-errors/{id}', {
+  //   responses: {
+  //     '204': {
+  //       description: 'DeviceError DELETE success',
+  //     },
+  //   },
+  // })
   async deleteById(@param.path.string('id') id: string): Promise<void> {
     await this.deviceErrorRepository.deleteById(id);
   }

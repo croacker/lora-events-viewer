@@ -6,15 +6,15 @@ import {
   Where,
 } from '@loopback/repository';
 import {
-  post,
+  // post,
   param,
   get,
   getFilterSchemaFor,
   getModelSchemaRef,
   getWhereSchemaFor,
-  patch,
-  put,
-  del,
+  // patch,
+  // put,
+  // del,
   requestBody,
 } from '@loopback/rest';
 import {DeviceLocation} from '../models';
@@ -26,14 +26,14 @@ export class DeviceLocationController {
     public deviceLocationRepository : DeviceLocationRepository,
   ) {}
 
-  @post('/device-locations', {
-    responses: {
-      '200': {
-        description: 'DeviceLocation model instance',
-        content: {'application/json': {schema: getModelSchemaRef(DeviceLocation)}},
-      },
-    },
-  })
+  // @post('/device-locations', {
+  //   responses: {
+  //     '200': {
+  //       description: 'DeviceLocation model instance',
+  //       content: {'application/json': {schema: getModelSchemaRef(DeviceLocation)}},
+  //     },
+  //   },
+  // })
   async create(
     @requestBody({
       content: {
@@ -79,14 +79,14 @@ export class DeviceLocationController {
     return this.deviceLocationRepository.find(filter);
   }
 
-  @patch('/device-locations', {
-    responses: {
-      '200': {
-        description: 'DeviceLocation PATCH success count',
-        content: {'application/json': {schema: CountSchema}},
-      },
-    },
-  })
+  // @patch('/device-locations', {
+  //   responses: {
+  //     '200': {
+  //       description: 'DeviceLocation PATCH success count',
+  //       content: {'application/json': {schema: CountSchema}},
+  //     },
+  //   },
+  // })
   async updateAll(
     @requestBody({
       content: {
@@ -113,13 +113,13 @@ export class DeviceLocationController {
     return this.deviceLocationRepository.findById(id);
   }
 
-  @patch('/device-locations/{id}', {
-    responses: {
-      '204': {
-        description: 'DeviceLocation PATCH success',
-      },
-    },
-  })
+  // @patch('/device-locations/{id}', {
+  //   responses: {
+  //     '204': {
+  //       description: 'DeviceLocation PATCH success',
+  //     },
+  //   },
+  // })
   async updateById(
     @param.path.string('id') id: string,
     @requestBody({
@@ -134,13 +134,13 @@ export class DeviceLocationController {
     await this.deviceLocationRepository.updateById(id, deviceLocation);
   }
 
-  @put('/device-locations/{id}', {
-    responses: {
-      '204': {
-        description: 'DeviceLocation PUT success',
-      },
-    },
-  })
+  // @put('/device-locations/{id}', {
+  //   responses: {
+  //     '204': {
+  //       description: 'DeviceLocation PUT success',
+  //     },
+  //   },
+  // })
   async replaceById(
     @param.path.string('id') id: string,
     @requestBody() deviceLocation: DeviceLocation,
@@ -148,13 +148,13 @@ export class DeviceLocationController {
     await this.deviceLocationRepository.replaceById(id, deviceLocation);
   }
 
-  @del('/device-locations/{id}', {
-    responses: {
-      '204': {
-        description: 'DeviceLocation DELETE success',
-      },
-    },
-  })
+  // @del('/device-locations/{id}', {
+  //   responses: {
+  //     '204': {
+  //       description: 'DeviceLocation DELETE success',
+  //     },
+  //   },
+  // })
   async deleteById(@param.path.string('id') id: string): Promise<void> {
     await this.deviceLocationRepository.deleteById(id);
   }

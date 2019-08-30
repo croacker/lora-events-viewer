@@ -6,15 +6,15 @@ import {
   Where,
 } from '@loopback/repository';
 import {
-  post,
+  // post,
   param,
   get,
   getFilterSchemaFor,
   getModelSchemaRef,
   getWhereSchemaFor,
-  patch,
-  put,
-  del,
+  // patch,
+  // put,
+  // del,
   requestBody,
 } from '@loopback/rest';
 import {DeviceStatus} from '../models';
@@ -26,14 +26,14 @@ export class DeviceStatusController {
     public deviceStatusRepository : DeviceStatusRepository,
   ) {}
 
-  @post('/device-statuses', {
-    responses: {
-      '200': {
-        description: 'DeviceStatus model instance',
-        content: {'application/json': {schema: getModelSchemaRef(DeviceStatus)}},
-      },
-    },
-  })
+  // @post('/device-statuses', {
+  //   responses: {
+  //     '200': {
+  //       description: 'DeviceStatus model instance',
+  //       content: {'application/json': {schema: getModelSchemaRef(DeviceStatus)}},
+  //     },
+  //   },
+  // })
   async create(
     @requestBody({
       content: {
@@ -79,14 +79,14 @@ export class DeviceStatusController {
     return this.deviceStatusRepository.find(filter);
   }
 
-  @patch('/device-statuses', {
-    responses: {
-      '200': {
-        description: 'DeviceStatus PATCH success count',
-        content: {'application/json': {schema: CountSchema}},
-      },
-    },
-  })
+  // @patch('/device-statuses', {
+  //   responses: {
+  //     '200': {
+  //       description: 'DeviceStatus PATCH success count',
+  //       content: {'application/json': {schema: CountSchema}},
+  //     },
+  //   },
+  // })
   async updateAll(
     @requestBody({
       content: {
@@ -113,13 +113,13 @@ export class DeviceStatusController {
     return this.deviceStatusRepository.findById(id);
   }
 
-  @patch('/device-statuses/{id}', {
-    responses: {
-      '204': {
-        description: 'DeviceStatus PATCH success',
-      },
-    },
-  })
+  // @patch('/device-statuses/{id}', {
+  //   responses: {
+  //     '204': {
+  //       description: 'DeviceStatus PATCH success',
+  //     },
+  //   },
+  // })
   async updateById(
     @param.path.string('id') id: string,
     @requestBody({
@@ -134,13 +134,13 @@ export class DeviceStatusController {
     await this.deviceStatusRepository.updateById(id, deviceStatus);
   }
 
-  @put('/device-statuses/{id}', {
-    responses: {
-      '204': {
-        description: 'DeviceStatus PUT success',
-      },
-    },
-  })
+  // @put('/device-statuses/{id}', {
+  //   responses: {
+  //     '204': {
+  //       description: 'DeviceStatus PUT success',
+  //     },
+  //   },
+  // })
   async replaceById(
     @param.path.string('id') id: string,
     @requestBody() deviceStatus: DeviceStatus,
@@ -148,13 +148,13 @@ export class DeviceStatusController {
     await this.deviceStatusRepository.replaceById(id, deviceStatus);
   }
 
-  @del('/device-statuses/{id}', {
-    responses: {
-      '204': {
-        description: 'DeviceStatus DELETE success',
-      },
-    },
-  })
+  // @del('/device-statuses/{id}', {
+  //   responses: {
+  //     '204': {
+  //       description: 'DeviceStatus DELETE success',
+  //     },
+  //   },
+  // })
   async deleteById(@param.path.string('id') id: string): Promise<void> {
     await this.deviceStatusRepository.deleteById(id);
   }

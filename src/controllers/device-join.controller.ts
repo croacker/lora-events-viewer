@@ -6,15 +6,15 @@ import {
   Where,
 } from '@loopback/repository';
 import {
-  post,
+  // post,
   param,
   get,
   getFilterSchemaFor,
   getModelSchemaRef,
   getWhereSchemaFor,
-  patch,
-  put,
-  del,
+  // patch,
+  // put,
+  // del,
   requestBody,
 } from '@loopback/rest';
 import {DeviceJoin} from '../models';
@@ -26,14 +26,14 @@ export class DeviceJoinController {
     public deviceJoinRepository : DeviceJoinRepository,
   ) {}
 
-  @post('/device-joins', {
-    responses: {
-      '200': {
-        description: 'DeviceJoin model instance',
-        content: {'application/json': {schema: getModelSchemaRef(DeviceJoin)}},
-      },
-    },
-  })
+  // @post('/device-joins', {
+  //   responses: {
+  //     '200': {
+  //       description: 'DeviceJoin model instance',
+  //       content: {'application/json': {schema: getModelSchemaRef(DeviceJoin)}},
+  //     },
+  //   },
+  // })
   async create(
     @requestBody({
       content: {
@@ -79,14 +79,14 @@ export class DeviceJoinController {
     return this.deviceJoinRepository.find(filter);
   }
 
-  @patch('/device-joins', {
-    responses: {
-      '200': {
-        description: 'DeviceJoin PATCH success count',
-        content: {'application/json': {schema: CountSchema}},
-      },
-    },
-  })
+  // @patch('/device-joins', {
+  //   responses: {
+  //     '200': {
+  //       description: 'DeviceJoin PATCH success count',
+  //       content: {'application/json': {schema: CountSchema}},
+  //     },
+  //   },
+  // })
   async updateAll(
     @requestBody({
       content: {
@@ -113,13 +113,13 @@ export class DeviceJoinController {
     return this.deviceJoinRepository.findById(id);
   }
 
-  @patch('/device-joins/{id}', {
-    responses: {
-      '204': {
-        description: 'DeviceJoin PATCH success',
-      },
-    },
-  })
+  // @patch('/device-joins/{id}', {
+  //   responses: {
+  //     '204': {
+  //       description: 'DeviceJoin PATCH success',
+  //     },
+  //   },
+  // })
   async updateById(
     @param.path.string('id') id: string,
     @requestBody({
@@ -134,13 +134,13 @@ export class DeviceJoinController {
     await this.deviceJoinRepository.updateById(id, deviceJoin);
   }
 
-  @put('/device-joins/{id}', {
-    responses: {
-      '204': {
-        description: 'DeviceJoin PUT success',
-      },
-    },
-  })
+  // @put('/device-joins/{id}', {
+  //   responses: {
+  //     '204': {
+  //       description: 'DeviceJoin PUT success',
+  //     },
+  //   },
+  // })
   async replaceById(
     @param.path.string('id') id: string,
     @requestBody() deviceJoin: DeviceJoin,
@@ -148,13 +148,13 @@ export class DeviceJoinController {
     await this.deviceJoinRepository.replaceById(id, deviceJoin);
   }
 
-  @del('/device-joins/{id}', {
-    responses: {
-      '204': {
-        description: 'DeviceJoin DELETE success',
-      },
-    },
-  })
+  // @del('/device-joins/{id}', {
+  //   responses: {
+  //     '204': {
+  //       description: 'DeviceJoin DELETE success',
+  //     },
+  //   },
+  // })
   async deleteById(@param.path.string('id') id: string): Promise<void> {
     await this.deviceJoinRepository.deleteById(id);
   }

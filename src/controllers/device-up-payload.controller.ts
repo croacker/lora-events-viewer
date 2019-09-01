@@ -1,8 +1,18 @@
 // Uncomment these imports to begin using these cool features!
-import { RestBindings, get, ResponseObject, param } from '@loopback/rest';
+import {
+  RestBindings,
+  get,
+  ResponseObject,
+  param,
+  getWhereSchemaFor,
+  getModelSchemaRef,
+  getFilterSchemaFor,
+} from '@loopback/rest';
 import { inject } from '@loopback/context';
 import { Request } from 'express';
-import { DeviceUpPayload } from '../models';
+import {DeviceUp, DeviceUpPayload} from '../models';
+import {Count, CountSchema, Filter, repository, Where} from '@loopback/repository';
+import {DeviceUpRepository} from '../repositories';
 // import {inject} from '@loopback/context';
 
 const DEVICE_UP_RESPONSE: ResponseObject = {
@@ -29,7 +39,8 @@ const DEVICE_UP_RESPONSE: ResponseObject = {
 };
 
 export class DeviceUpPayloadController {
-  constructor(@inject(RestBindings.Http.REQUEST) private req: Request) { }
+  constructor(@repository(DeviceUpRepository)
+              public deviceUpRepository : DeviceUpRepository,) { }
 
   @get('/device-up-payload/from-hex/{hexStr}', {
     responses: {
@@ -53,6 +64,50 @@ export class DeviceUpPayloadController {
   ): Promise<object> {
     const buf = Buffer.from(base64Str, "base64");
     return this.bufferToModel(buf);
+  }
+
+  @get('/device-up-payload/count', {
+    responses: {
+      '200': {
+        description: 'DeviceUpPayload model count',
+        content: {'application/json': {schema: CountSchema}},
+      },
+    },
+  })
+  async count(
+    @param.query.object('where', getWhereSchemaFor(DeviceUp)) where?: Where<DeviceUp>,
+  ): Promise<Count> {
+    return this.deviceUpRepository.count(where);
+  }
+
+  @get('/device-up-payload', {
+    responses: {
+      '200': {
+        description: 'Array of DeviceUpPayload model instances',
+        content: {
+          'application/json': {
+            schema: {type: 'array', items: getModelSchemaRef(DeviceUp)},
+          },
+        },
+      },
+    },
+  })
+  async find(
+    @param.query.object('filter', getFilterSchemaFor(DeviceUp)) filter?: Filter<DeviceUp>,
+  ): Promise<DeviceUp[]> {
+    return this.deviceUpRepository.find(filter);
+  }
+
+  @get('/device-up-payload/{id}', {
+    responses: {
+      '200': {
+        description: 'DeviceUpPayload model instance',
+        content: {'application/json': {schema: getModelSchemaRef(DeviceUp)}},
+      },
+    },
+  })
+  async findById(@param.path.string('id') id: string): Promise<DeviceUp> {
+    return this.deviceUpRepository.findById(id);
   }
 
 

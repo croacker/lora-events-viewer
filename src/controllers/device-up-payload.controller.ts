@@ -10,9 +10,9 @@ import {
 } from '@loopback/rest';
 import { inject } from '@loopback/context';
 import { Request } from 'express';
-import {DeviceUp, DeviceUpPayload} from '../models';
-import {Count, CountSchema, Filter, repository, Where} from '@loopback/repository';
-import {DeviceUpRepository} from '../repositories';
+import { DeviceUp, DeviceUpPayload } from '../models';
+import { Count, CountSchema, Filter, repository, Where } from '@loopback/repository';
+import { DeviceUpRepository } from '../repositories';
 // import {inject} from '@loopback/context';
 
 const DEVICE_UP_RESPONSE: ResponseObject = {
@@ -40,37 +40,61 @@ const DEVICE_UP_RESPONSE: ResponseObject = {
 
 export class DeviceUpPayloadController {
   constructor(@repository(DeviceUpRepository)
-              public deviceUpRepository : DeviceUpRepository,) { }
+  public deviceUpRepository: DeviceUpRepository, ) { }
 
-  @get('/device-up-payload/from-hex/{hexStr}', {
+  @get('/device-up-payload/lw-360-hr/from-hex/{hexStr}', {
     responses: {
       '200': DEVICE_UP_RESPONSE,
     },
   })
-  async fromHex(
+  async lw360hrFromHex(
     @param.path.string('hexStr') hexStr: string
   ): Promise<object> {
     const buf = Buffer.from(hexStr, "hex");
-    return this.bufferToModel(buf);
+    return this.bufferToLw360HrPayload(buf);
   }
 
-  @get('/device-up-payload/from-base64/{base64Str}', {
+  @get('/device-up-payload/lw-360-hr/from-base64/{base64Str}', {
     responses: {
       '200': DEVICE_UP_RESPONSE,
     },
   })
-  async fromBase64(
+  async lw360hrFromBase64(
     @param.path.string('base64Str') base64Str: string
   ): Promise<object> {
     const buf = Buffer.from(base64Str, "base64");
-    return this.bufferToModel(buf);
+    return this.bufferToLw360HrPayload(buf);
+  }
+
+  @get('/device-up-payload/goodwin/from-hex/{hexStr}', {
+    responses: {
+      '200': DEVICE_UP_RESPONSE,
+    },
+  })
+  async goodwinFromBase64(
+    @param.path.string('hexStr') hexStr: string
+  ): Promise<object> {
+    const buf = Buffer.from(hexStr, "hex");
+    return this.bufferToLw360HrPayload(buf);
+  }
+
+  @get('/device-up-payload/goodwin/from-base64/{base64Str}', {
+    responses: {
+      '200': DEVICE_UP_RESPONSE,
+    },
+  })
+  async goodwinFromHex(
+    @param.path.string('base64Str') base64Str: string
+  ): Promise<object> {
+    const buf = Buffer.from(base64Str, "base64");
+    return this.bufferToLw360HrPayload(buf);
   }
 
   @get('/device-up-payload/count', {
     responses: {
       '200': {
         description: 'DeviceUpPayload model count',
-        content: {'application/json': {schema: CountSchema}},
+        content: { 'application/json': { schema: CountSchema } },
       },
     },
   })
@@ -86,7 +110,7 @@ export class DeviceUpPayloadController {
         description: 'Array of DeviceUpPayload model instances',
         content: {
           'application/json': {
-            schema: {type: 'array', items: getModelSchemaRef(DeviceUp)},
+            schema: { type: 'array', items: getModelSchemaRef(DeviceUp) },
           },
         },
       },
@@ -102,7 +126,7 @@ export class DeviceUpPayloadController {
     responses: {
       '200': {
         description: 'DeviceUpPayload model instance',
-        content: {'application/json': {schema: getModelSchemaRef(DeviceUp)}},
+        content: { 'application/json': { schema: getModelSchemaRef(DeviceUp) } },
       },
     },
   })
@@ -111,7 +135,7 @@ export class DeviceUpPayloadController {
   }
 
 
-  bufferToModel(buf: Buffer) {
+  bufferToLw360HrPayload(buf: Buffer) {
     const deviceUpPayload = new DeviceUpPayload()
 
     let part = buf.slice(0, 1).reverse()
@@ -149,7 +173,7 @@ export class DeviceUpPayloadController {
 
     part = buf.slice(16, 20).reverse()
     hex = this.toHex(part as Buffer)
-    deviceUpPayload.dateTime = parseInt(hex, 16)*1000
+    deviceUpPayload.dateTime = parseInt(hex, 16) * 1000
 
     part = buf.slice(20, 40).reverse()
     hex = this.toHex(part as Buffer)

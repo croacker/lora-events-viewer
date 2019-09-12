@@ -118,8 +118,17 @@ export class DeviceUpPayloadController {
   })
   async find(
     @param.query.object('filter', getFilterSchemaFor(DeviceUp)) filter?: Filter<DeviceUp>,
-  ): Promise<DeviceUp[]> {
-    return this.deviceUpRepository.find(filter);
+  ): Promise<DeviceUpPayload[]> {
+    const deviceUps = await this.deviceUpRepository.find(filter);
+    return deviceUps.map(deviceUp => {
+      let deviceUpPayload;
+      if (deviceUp.data != undefined) {
+        deviceUpPayload = this.bufferToLw360HrPayload(deviceUp.data)
+      }else{
+        deviceUpPayload = new DeviceUpPayload()
+      }
+      return deviceUpPayload;
+    })
   }
 
   @get('/device-up-payload/{id}', {
@@ -149,7 +158,6 @@ export class DeviceUpPayloadController {
     part = buf.slice(3, 7).reverse()
     hex = this.toHex(part as Buffer)
     deviceUpPayload.longitude = parseInt(hex, 16) * 0.000001
-
 
     part = buf.slice(7, 11).reverse()
     hex = this.toHex(part as Buffer)

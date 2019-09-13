@@ -5,3 +5,4 @@ export * from './device-join.model';
 export * from './device-location.model';
 export * from './device-status.model';
 export * from './device-up-payload.model';
+export * from './device-up-v.model';

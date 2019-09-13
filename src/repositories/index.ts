@@ -4,3 +4,4 @@ export * from './device-error.repository';
 export * from './device-join.repository';
 export * from './device-location.repository';
 export * from './device-status.repository';
+export * from './device-up-v.repository';

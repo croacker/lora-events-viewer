@@ -1,6 +1,5 @@
 // Uncomment these imports to begin using these cool features!
 import {
-  RestBindings,
   get,
   ResponseObject,
   param,
@@ -8,12 +7,9 @@ import {
   getModelSchemaRef,
   getFilterSchemaFor,
 } from '@loopback/rest';
-import { inject } from '@loopback/context';
-import { Request } from 'express';
 import { DeviceUp, DeviceUpPayload } from '../models';
 import { Count, CountSchema, Filter, repository, Where } from '@loopback/repository';
 import { DeviceUpRepository } from '../repositories';
-// import {inject} from '@loopback/context';
 
 const DEVICE_UP_RESPONSE: ResponseObject = {
   description: 'Ping Response',

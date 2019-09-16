@@ -2,7 +2,7 @@
 
 class Lw360hrService {
   dataToEntity(buf: Buffer): Lw360hrData {
-    var ent = new Lw360hrData();
+    const ent = new Lw360hrData();
     const protocolVersion = buf.slice(0, 1).reverse()
     console.log(`protocolVersion = ${(protocolVersion as Buffer).toString('hex')}`);
 
@@ -64,13 +64,9 @@ class Lw360hrData {
   latitude: string;
   gpsFixStatus: string;
   reserve: string;
-
   calorie: string;
-
   batteryCapacity: string;
-
   dateTime: string;
-
   beaconId: string;
   beaconType: string;
   rssi: string;

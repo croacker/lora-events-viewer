@@ -1,7 +1,7 @@
-import {Entity, model, property} from '@loopback/repository';
+import { Entity, model, property } from '@loopback/repository';
 
-@model({settings: {}, name: 'device_up_v'})
-export class DeviceUpV extends Entity {
+@model({ settings: {}, name: 'device_location_v' })
+export class DeviceLocationV extends Entity {
   @property({
     type: 'string',
     id: true,
@@ -18,9 +18,10 @@ export class DeviceUpV extends Entity {
 
   @property({
     type: 'string',
+    required: true,
     name: 'dev_eui',
   })
-  devEui?: string;
+  devEui: string;
 
   @property({
     type: 'string',
@@ -42,33 +43,27 @@ export class DeviceUpV extends Entity {
 
   @property({
     type: 'number',
-    name: 'frequency',
+    name: 'altitude',
   })
-  frequency?: number;
+  altitude?: number;
 
   @property({
     type: 'number',
-    name: 'dr',
+    name: 'latitude',
   })
-  dr?: number;
-
-  @property({
-    type: 'boolean',
-    name: 'adr',
-  })
-  adr?: boolean;
+  latitude?: number;
 
   @property({
     type: 'number',
-    name: 'f_cnt',
+    name: 'longitude',
   })
-  fCnt?: number;
+  longitude?: number;
 
   @property({
-    type: 'number',
-    name: 'f_port',
+    type: 'string',
+    name: 'geohash',
   })
-  fPort?: number;
+  geohash?: string;
 
   @property({
     type: 'string',
@@ -77,32 +72,18 @@ export class DeviceUpV extends Entity {
   tags?: string;
 
   @property({
-    type: 'string',
-    name: 'data',
+    type: 'number',
+    name: 'accuracy',
   })
-  data?: Buffer;
+  accuracy?: number;
 
-  @property({
-    type: 'string',
-    name: 'rx_info',
-  })
-  rxInfo?: string;
 
-  @property({
-    type: 'string',
-    name: 'object',
-  })
-  object?: string;
-
-  [prop: string]: any;
-
-  constructor(data?: Partial<DeviceUpV>) {
+  constructor(data?: Partial<DeviceLocationV>) {
     super(data);
   }
 }
 
-export interface DeviceUpVRelations {
-
+export interface DeviceLocationVRelations {
 }
 
-export type DeviceUpVWithRelations = DeviceUpV & DeviceUpVRelations;
+export type DeviceLocationVWithRelations = DeviceLocationV & DeviceLocationVRelations;
